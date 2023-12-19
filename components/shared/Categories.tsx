@@ -4,7 +4,7 @@ import React from "react";
 
 const Categories = () => {
   return (
-    <div className="flex justify-center max-sm:justify-between items-start text-center gap-10 max-sm:gap-5 max-md:overflow-x-auto">
+    <div className="flex justify-center max-sm:justify-between items-start text-center gap-10 max-sm:gap-5 max-md:overflow-x-auto mb-16">
       {categories.map((item) => {
         return (
           <Link
