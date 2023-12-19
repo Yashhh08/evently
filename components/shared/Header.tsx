@@ -12,7 +12,10 @@ const Header = () => {
     <nav className="flex items-center justify-between p-3 border h-14">
       <div className="flex items-center justify-center gap-2">
         <Image src={"/images/favicon.ico"} alt="logo" height={24} width={24} />
-        <Link href={"/"} className="text-3xl font-semibold max-sm:text-2xl">
+        <Link
+          href={"/"}
+          className="text-3xl font-bold max-sm:text-2xl bg-gradient-to-r from-violet-600 to-primary bg-clip-text text-transparent"
+        >
           Evently
         </Link>
       </div>

@@ -1,7 +1,11 @@
+import Categories from "@/components/shared/Categories";
+import SwiperComponent from "@/components/shared/SwiperComponent";
+
 export default function Home() {
   return (
     <>
-      <h1 className="text-3xl">Evently</h1>
+      <SwiperComponent />
+      <Categories />
     </>
   );
 }
