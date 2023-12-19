@@ -3,6 +3,7 @@ import { MdAddBusiness } from "react-icons/md";
 import { IoFastFood } from "react-icons/io5";
 import { IoGameController } from "react-icons/io5";
 import { FaMasksTheater } from "react-icons/fa6";
+import { MdComputer } from "react-icons/md";
 
 interface Category {
   icon: JSX.Element;
@@ -29,6 +30,11 @@ export const categories: Category[] = [
   {
     icon: <IoGameController />,
     title: "Hobbies",
+    path: "/",
+  },
+  {
+    icon: <MdComputer />,
+    title: "Technology",
     path: "/",
   },
   {

@@ -16,7 +16,7 @@ const MobileNav = () => {
   const pathName = usePathname();
 
   return (
-    <div className="hidden max-sm:block text-center">
+    <div className="hidden max-md:block text-center">
       <Sheet>
         <SheetTrigger className="flex justify-center items-center ml-2">
           <GiHamburgerMenu />

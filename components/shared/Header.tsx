@@ -21,7 +21,7 @@ const Header = () => {
       </div>
 
       <div className="flex justify-center items-center gap-4">
-        <div className="flex items-center justify-center gap-5 font-semibold max-sm:hidden">
+        <div className="flex items-center justify-center gap-5 font-semibold max-md:hidden">
           {sidebarLinks.map((link) => {
             return (
               <Link

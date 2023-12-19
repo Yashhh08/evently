@@ -17,8 +17,8 @@ const SwiperComponent = () => {
       autoplay={{
         delay: 3000,
       }}
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
+      // onSlideChange={() => console.log("slide change")}
+      // onSwiper={(swiper) => console.log(swiper)}
     >
       <SwiperSlide>
         <div className="flex justify-around items-center w-full h-full p-10 max-sm:flex-col max-sm:p-0 max-sm:gap-3">
