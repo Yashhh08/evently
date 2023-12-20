@@ -62,7 +62,7 @@ const SearchBar = ({ route, placeholder, otherClasses }: customTypes) => {
         placeholder={placeholder}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="bg-transparent text-slate-500 dark:text-slate-300 text-base font-thin border-none max-sm:text-xs truncate focus:outline-none"
+        className="bg-transparent text-slate-900 dark:text-slate-300 text-base font-normal border-none max-sm:text-xs truncate focus:outline-none"
       />
     </div>
   );

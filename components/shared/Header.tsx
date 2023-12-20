@@ -27,7 +27,7 @@ const Header = () => {
               <Link
                 href={link.path}
                 key={link.label}
-                className="flex items-center justify-center gap-2 hover:text-primary hover:scale-105 hover:underline-offset-8 hover:underline"
+                className="flex items-center justify-center gap-2 hover:text-primary hover:scale-105 hover:underline-offset-8 hover:underline transition-all"
               >
                 <div className="scale-110">{link.image}</div>
                 <p>{link.label}</p>

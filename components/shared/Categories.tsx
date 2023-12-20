@@ -10,7 +10,7 @@ const Categories = () => {
           <Link
             href={item.path}
             key={item.title}
-            className="flex flex-col justify-center items-center gap-4 max-sm:gap-2 w-32 h-auto hover:text-primary hover:scale-105"
+            className="flex flex-col justify-center items-center gap-4 max-sm:gap-2 w-32 h-auto hover:text-primary md:hover:scale-105 transition-all max-sm:text-primary"
           >
             <div className="h-12 w-12 scale-150 max-sm:scale-100 border flex justify-center items-center rounded-full">
               {item.icon}
