@@ -8,7 +8,7 @@ interface Event {
   category: string;
   image: string;
   date: string;
-  location: string;
+  landmark: string;
   price: string;
   organizer: string;
 }
@@ -24,7 +24,7 @@ const events = [
     image:
       "https://images.pexels.com/photos/2608512/pexels-photo-2608512.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     date: "Date 1",
-    location: "Location 1",
+    landmark: "landmark 1",
     address: "Address 1",
     price: "Price 1",
     organizer: "Organizer 1",
@@ -37,7 +37,7 @@ const events = [
     image:
       "https://images.pexels.com/photos/2608512/pexels-photo-2608512.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     date: "Date 2",
-    location: "Location 2",
+    landmark: "landmark 2",
     address: "Address 1",
     price: "Price 2",
     organizer: "Organizer 2",
@@ -50,7 +50,7 @@ const events = [
     image:
       "https://images.pexels.com/photos/2608512/pexels-photo-2608512.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     date: "Date 3",
-    location: "Location 3",
+    landmark: "landmark 3",
     address: "Address 1",
     price: "Price 3",
     organizer: "Organizer 3",
@@ -63,7 +63,7 @@ const events = [
     image:
       "https://images.pexels.com/photos/2608512/pexels-photo-2608512.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     date: "Date 4",
-    location: "Location 4",
+    landmark: "landmark 4",
     address: "Address 1",
     price: "Price 4",
     organizer: "Organizer 4",
@@ -76,7 +76,7 @@ const events = [
     image:
       "https://images.pexels.com/photos/2608512/pexels-photo-2608512.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     date: "Date 5",
-    location: "Location 5",
+    landmark: "landmark 5",
     address: "Address 1",
     price: "Price 5",
     organizer: "Organizer 5",
@@ -89,7 +89,7 @@ const events = [
     image:
       "https://images.pexels.com/photos/2608512/pexels-photo-2608512.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     date: "Date 6",
-    location: "Location 6",
+    landmark: "landmark 6",
     address: "Address 1",
     price: "Price 6",
     organizer: "Organizer 6",
