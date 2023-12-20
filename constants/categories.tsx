@@ -4,6 +4,11 @@ import { IoFastFood } from "react-icons/io5";
 import { IoGameController } from "react-icons/io5";
 import { FaMasksTheater } from "react-icons/fa6";
 import { MdComputer } from "react-icons/md";
+import { MdEventNote } from "react-icons/md";
+import { MdSportsGymnastics } from "react-icons/md";
+import { GrWorkshop } from "react-icons/gr";
+import { FaMusic } from "react-icons/fa6";
+import { MdOutlineHealthAndSafety } from "react-icons/md";
 
 interface Category {
   icon: JSX.Element;
@@ -14,7 +19,7 @@ interface Category {
 export const categories: Category[] = [
   {
     icon: <MdNightlife />,
-    title: "Nightlife",
+    title: "Parties",
     path: "/",
   },
   {
@@ -34,12 +39,37 @@ export const categories: Category[] = [
   },
   {
     icon: <MdComputer />,
-    title: "Technology",
+    title: "Tech and Innovation",
     path: "/",
   },
   {
     icon: <FaMasksTheater />,
     title: "Performing & Visual Arts",
+    path: "/",
+  },
+  {
+    icon: <MdEventNote />,
+    title: "Exhibitions",
+    path: "/",
+  },
+  {
+    icon: <MdSportsGymnastics />,
+    title: "Sports & Fitness",
+    path: "/",
+  },
+  {
+    icon: <GrWorkshop />,
+    title: "Seminars, Workshops and Conferences",
+    path: "/",
+  },
+  {
+    icon: <FaMusic />,
+    title: "Concerts and Music",
+    path: "/",
+  },
+  {
+    icon: <MdOutlineHealthAndSafety />,
+    title: "Health and Wellness",
     path: "/",
   },
 ];
