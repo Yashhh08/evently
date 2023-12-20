@@ -12,11 +12,11 @@ interface FormUrlQueryParams {
   value: string
 }
 
-export const formUrlQuery = (params: FormUrlQueryParams) => {
+export const formUrlQuery = ({ params, key, value }: FormUrlQueryParams) => {
 
-  const currentUrl = qs.parse(params.params);
+  const currentUrl = qs.parse(params);
 
-  currentUrl[params.key] = params.value;
+  currentUrl[key] = value;
 
   return qs.stringifyUrl({
     url: window.location.pathname,
