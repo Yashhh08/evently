@@ -13,7 +13,7 @@ interface Event {
   image: string;
   date: string;
   landmark: string;
-  location: string;
+  location?: string;
   price: string;
   organizer: string;
 }
