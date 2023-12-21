@@ -9,7 +9,7 @@ import MobileNav from "./MobileNav";
 
 const Header = () => {
   return (
-    <nav className="flex items-center justify-between p-3 border h-14">
+    <nav className="flex items-center justify-between p-3 border-b h-14">
       <div className="flex items-center justify-center gap-2">
         <Image src={"/images/favicon.ico"} alt="logo" height={24} width={24} />
         <Link

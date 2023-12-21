@@ -24,12 +24,12 @@ const SwiperComponent = () => {
       {swiperContent.map((content) => {
         return (
           <SwiperSlide>
-            <div className="flex flex-1 justify-around items-center w-full h-full p-10 max-sm:flex-col max-sm:p-0 max-sm:gap-3">
+            <div className="max-sm:h-screen flex flex-1 justify-around items-center h-full w-full p-10 max-sm:flex-col max-sm:p-0 max-sm:pb-36 gap-10 max-sm:gap-0">
               <div className="flex flex-col text-center gap-8 w-[550px] max-sm:w-auto max-sm:gap-3">
-                <h1 className="text-5xl font-bold max-sm:text-3xl bg-gradient-to-br from-violet-600 to-primary bg-clip-text text-transparent">
+                <h1 className="text-5xl font-bold max-md:text-3xl bg-gradient-to-br from-violet-600 to-primary bg-clip-text text-transparent">
                   {content.heading}
                 </h1>
-                <h2 className="text-xl font-bold max-sm:text-lg bg-gradient-to-br from-primary to-gray-500 bg-clip-text text-transparent">
+                <h2 className="text-xl font-bold max-md:text-lg bg-gradient-to-br from-primary to-gray-500 bg-clip-text text-transparent">
                   {content.description}
                 </h2>
                 <div>
@@ -43,7 +43,7 @@ const SwiperComponent = () => {
                   width={content.alt === "hero" ? 350 : 700}
                   height={0}
                   className={`max-sm:p-2 rounded-sm max-sm:rounded-xl ${
-                    content.alt === "hero" ? "max-sm:w-[220px]" : ""
+                    content.alt === "hero" ? "max-sm:w-[340px]" : ""
                   }`}
                 />
               </div>
