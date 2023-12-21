@@ -6,17 +6,18 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { Autoplay } from "swiper/modules";
 import { swiperContent } from "../../constants/swiperContent";
+import Link from "next/link";
 
 const SwiperComponent = () => {
   return (
     <Swiper
       modules={[Autoplay]}
-      className="h-[500px] max-sm:h-auto mb-16"
+      className="h-screen mb-1"
       spaceBetween={100}
       slidesPerView={1}
       centeredSlides={true}
       autoplay={{
-        delay: 3000,
+        delay: 5000,
       }}
       // onSlideChange={() => console.log("slide change")}
       // onSwiper={(swiper) => console.log(swiper)}
@@ -24,7 +25,7 @@ const SwiperComponent = () => {
       {swiperContent.map((content) => {
         return (
           <SwiperSlide>
-            <div className="flex justify-around items-center w-full h-full p-10 max-sm:flex-col max-sm:p-0 max-sm:gap-3">
+            <div className="h-screen flex flex-1 justify-around items-center p-10 max-md:flex-col max-sm:p-0 max-sm:pb-20 gap-10 max-sm:gap-0 pb-32">
               <div className="flex flex-col text-center gap-8 w-[550px] max-sm:w-auto max-sm:gap-3">
                 <h1 className="text-5xl font-bold max-sm:text-3xl bg-gradient-to-br from-violet-600 to-primary bg-clip-text text-transparent">
                   {content.heading}
@@ -33,17 +34,20 @@ const SwiperComponent = () => {
                   {content.description}
                 </h2>
                 <div>
-                  <Button className="w-fit">Explore Now</Button>
+                  <Link href="/#categories">
+                    <Button className="w-fit">Explore Now</Button>
+                  </Link>
                 </div>
               </div>
               <div className="flex justify-center items-center">
                 <Image
                   src={content.imageUrl}
                   alt={content.alt}
-                  width={content.alt === "hero" ? 350 : 700}
+                  width={content.alt === "hero" ? 300 : 700}
                   height={0}
-                  className={`max-sm:p-2 rounded-sm ${
-                    content.alt === "hero" ? "max-sm:w-[220px]" : ""
+                  priority={true}
+                  className={`max-sm:p-2 rounded-sm max-sm:rounded-xl ${
+                    content.alt === "hero" ? "max-sm:w-[280px] w-[380px]" : ""
                   }`}
                 />
               </div>
