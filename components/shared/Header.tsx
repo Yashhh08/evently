@@ -12,19 +12,22 @@ const Header = () => {
     <nav className="flex items-center justify-between p-3 border h-14">
       <div className="flex items-center justify-center gap-2">
         <Image src={"/images/favicon.ico"} alt="logo" height={24} width={24} />
-        <Link href={"/"} className="text-3xl font-semibold max-sm:text-2xl">
+        <Link
+          href={"/"}
+          className="text-3xl font-bold max-sm:text-2xl bg-gradient-to-r from-violet-600 to-primary bg-clip-text text-transparent"
+        >
           Evently
         </Link>
       </div>
 
       <div className="flex justify-center items-center gap-4">
-        <div className="flex items-center justify-center gap-5 font-semibold max-sm:hidden">
+        <div className="flex items-center justify-center gap-5 font-semibold max-md:hidden">
           {sidebarLinks.map((link) => {
             return (
               <Link
                 href={link.path}
                 key={link.label}
-                className="flex items-center justify-center gap-2 hover:text-primary hover:scale-105 hover:underline-offset-8 hover:underline"
+                className="flex items-center justify-center gap-2 hover:text-primary hover:scale-105 hover:underline-offset-8 hover:underline transition-all"
               >
                 <div className="scale-110">{link.image}</div>
                 <p>{link.label}</p>
