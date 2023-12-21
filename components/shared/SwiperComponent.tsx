@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { Autoplay } from "swiper/modules";
 import { swiperContent } from "../../constants/swiperContent";
+import Link from "next/link";
 
 const SwiperComponent = () => {
   return (
@@ -33,7 +34,9 @@ const SwiperComponent = () => {
                   {content.description}
                 </h2>
                 <div>
-                  <Button className="w-fit">Explore Now</Button>
+                  <Link href="/#categories">
+                    <Button className="w-fit">Explore Now</Button>
+                  </Link>
                 </div>
               </div>
               <div className="flex justify-center items-center">
@@ -42,8 +45,9 @@ const SwiperComponent = () => {
                   alt={content.alt}
                   width={content.alt === "hero" ? 300 : 700}
                   height={0}
+                  priority={true}
                   className={`max-sm:p-2 rounded-sm max-sm:rounded-xl ${
-                    content.alt === "hero" ? "max-sm:w-[280px]" : ""
+                    content.alt === "hero" ? "max-sm:w-[280px] w-[380px]" : ""
                   }`}
                 />
               </div>
