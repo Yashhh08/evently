@@ -11,7 +11,7 @@ const SwiperComponent = () => {
   return (
     <Swiper
       modules={[Autoplay]}
-      className="h-[500px] max-sm:h-screen mb-16"
+      className="h-[500px] max-sm:h-auto mb-16"
       spaceBetween={100}
       slidesPerView={1}
       centeredSlides={true}
