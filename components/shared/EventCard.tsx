@@ -12,8 +12,8 @@ interface Event {
   category: string;
   image: string;
   date: string;
+  landmark: string;
   location: string;
-  address: string;
   price: string;
   organizer: string;
 }
@@ -44,10 +44,10 @@ const EventCard = ({ event }: Props) => {
         </div>
       </div>
       <div className="p-2 flex flex-col items-start gap-1 flex-1 font-medium">
-        <div className="flex gap-2">
+        <div className="w-full flex justify-evenly items-center">
           <Badge variant="default">{event.price}</Badge>
           <Badge variant="secondary">{event.category}</Badge>
-          <Badge variant="secondary">{event.location}</Badge>
+          <Badge variant="secondary">{event.landmark}</Badge>
         </div>
         <div className="flex flex-col justify-around flex-1">
           <p className="">{event.date}</p>
