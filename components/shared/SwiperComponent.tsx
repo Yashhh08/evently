@@ -11,12 +11,12 @@ const SwiperComponent = () => {
   return (
     <Swiper
       modules={[Autoplay]}
-      className="max-md:h-screen mb-16"
+      className="h-screen mb-1"
       spaceBetween={100}
       slidesPerView={1}
       centeredSlides={true}
       autoplay={{
-        delay: 3000,
+        delay: 5000,
       }}
       // onSlideChange={() => console.log("slide change")}
       // onSwiper={(swiper) => console.log(swiper)}
@@ -24,7 +24,7 @@ const SwiperComponent = () => {
       {swiperContent.map((content) => {
         return (
           <SwiperSlide>
-            <div className="max-md:h-screen flex flex-1 justify-around items-center p-10 max-md:flex-col max-sm:p-0 max-sm:pb-20 gap-10 max-sm:gap-0 max-md:mb-32">
+            <div className="h-screen flex flex-1 justify-around items-center p-10 max-md:flex-col max-sm:p-0 max-sm:pb-20 gap-10 max-sm:gap-0 pb-32">
               <div className="flex flex-col text-center gap-8 w-[550px] max-sm:w-auto max-sm:gap-3">
                 <h1 className="text-5xl font-bold max-sm:text-3xl bg-gradient-to-br from-violet-600 to-primary bg-clip-text text-transparent">
                   {content.heading}
