@@ -17,6 +17,7 @@ const eventSchema = new Schema({
     category: { type: String, ref: 'Category', required: true },
     organizer: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     attendees: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
     totalCapacity: { type: Number, required: true },
     availableTickets: { type: Number, required: true },
     ageRestriction: { type: Number, default: 0 },
