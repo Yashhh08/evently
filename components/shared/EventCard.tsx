@@ -4,29 +4,21 @@ import { Badge } from "../ui/badge";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
-
-interface Event {
-  _id: string;
-  title: string;
-  description: string;
-  category: string;
-  image: string;
-  date: string;
-  landmark: string;
-  location?: string;
-  price: string;
-  organizer: string;
-}
+import { dateConverter, timeFormatConverter } from "@/lib/utils";
+import Link from "next/link";
 
 interface Props {
-  event: Event;
+  event: any;
 }
 
 const EventCard = ({ event }: Props) => {
   const like = false;
 
   return (
-    <div className="border h-96 w-96 rounded-md flex flex-col hover:scale-105 transition-all shadow-md relative">
+    <Link
+      href={`/event/${event._id}`}
+      className="border h-96 w-96 rounded-md flex flex-col hover:scale-105 transition-all shadow-md relative"
+    >
       <Image
         src={event.image}
         alt={event._id}
@@ -44,21 +36,41 @@ const EventCard = ({ event }: Props) => {
         </div>
       </div>
       <div className="p-2 flex flex-col items-start gap-1 flex-1 font-medium">
-        <div className="w-full flex justify-evenly items-center">
-          <Badge variant="default">{event.price}</Badge>
-          <Badge variant="secondary">{event.category}</Badge>
-          <Badge variant="secondary">{event.landmark}</Badge>
+        <div className="w-full flex flex-wrap gap-2 justify-start items-center">
+          <Badge variant="default">
+            {event.isFree ? "Free" : `$ ${event.price}`}
+          </Badge>
+          <Badge variant="secondary">{event.category.name}</Badge>
+          <Badge variant="secondary">
+            {event.landmark ? event.landmark : "Online"}
+          </Badge>
         </div>
         <div className="flex flex-col justify-around flex-1">
-          <p className="">{event.date}</p>
+          <div className="flex flex-wrap gap-1">
+            <p className="text-sm">
+              {new Date(event.endDate) > new Date(event.startDate)
+                ? `${dateConverter(event.startDate)} - ${dateConverter(
+                    event.endDate
+                  )} `
+                : `${dateConverter(event.startDate)}`}
+            </p>
+            &nbsp;
+            <p className="text-sm">
+              {timeFormatConverter(event.startTime)} -{" "}
+              {timeFormatConverter(event.endTime)}
+            </p>
+          </div>
           <h3 className="text-xl font-semibold line-clamp-2">{event.title}</h3>
           <p className="font-normal text-xs line-clamp-2">
             {event.description}
           </p>
         </div>
       </div>
-      <p className="m p-2">{event.organizer}</p>
-    </div>
+      <Badge
+        variant={"secondary"}
+        className="m-1 w-fit"
+      >{`${event.organizer.firstName} ${event.organizer.lastName}`}</Badge>
+    </Link>
   );
 };
 

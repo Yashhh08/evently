@@ -4,7 +4,6 @@ import User from "../models/user.model";
 import { connectToDatabase } from "../dbconnection";
 import Event from "../models/event.model";
 import Order from "../models/order.model";
-
 export interface CreateUserParams {
     clerkId: string;
     email: string;
@@ -21,6 +20,24 @@ export async function createUser(userData: CreateUserParams) {
         const user = await User.create(userData);
 
         return JSON.parse(JSON.stringify(user));
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+export async function getUserByClerkId(clerkId: string) {
+    try {
+        await connectToDatabase();
+
+        const user = await User.findOne({ clerkId: clerkId });
+
+        if (!user) {
+            throw new Error("User not found");
+        }
+
+        return JSON.parse(JSON.stringify(user));
+
     } catch (error) {
         console.log(error);
         throw error;

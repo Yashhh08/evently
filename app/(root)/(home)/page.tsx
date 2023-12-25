@@ -1,5 +1,4 @@
 import Categories from "@/components/shared/Categories";
-import EventCard from "@/components/shared/EventCard";
 import EventCards from "@/components/shared/EventCards";
 import SearchBar from "@/components/shared/SearchBar";
 import SwiperComponent from "@/components/shared/SwiperComponent";
