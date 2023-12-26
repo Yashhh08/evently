@@ -174,7 +174,10 @@ const EventForm = (props: Props) => {
   }
 
   const handleKeyDown = (e: React.KeyboardEvent, field: any) => {
-    if (e.key === "Enter" && field.name === "tags") {
+    if (
+      (e.key === "Enter" && field.name === "tags") ||
+      (e.key === "," && field.name === "tags")
+    ) {
       e.preventDefault();
 
       const tagInput = e.target as HTMLInputElement;
@@ -312,7 +315,7 @@ const EventForm = (props: Props) => {
                   <Input
                     disabled={props.type === "edit"}
                     onKeyDown={(e) => handleKeyDown(e, field)}
-                    placeholder="Add tags and press enter to add them."
+                    placeholder="Add tags and press enter or `,` to add them."
                   />
 
                   {field.value.length > 0 && (
