@@ -34,11 +34,12 @@ import {
   CommandItem,
 } from "@/components/ui/command";
 import { categories } from "@/constants/categories";
-import { FileUploader } from "./FileUploader";
 import { createEvent } from "@/lib/actions/event.action";
 import { Textarea } from "../ui/textarea";
 import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
+import { FileUploader } from "./FileUploader";
+import { useUploadThing } from "@/lib/uploadthing";
 
 const formSchema = z.object({
   title: z.string().trim().min(2, {
@@ -80,6 +81,8 @@ const EventForm = (props: Props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
 
+  const { startUpload } = useUploadThing("imageUploader");
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -108,12 +111,24 @@ const EventForm = (props: Props) => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
 
+    let uploadedImageUrl = values.photo;
+
+    if (files.length > 0) {
+      const uploadedImages = await startUpload(files);
+
+      if (!uploadedImages) {
+        return;
+      }
+
+      uploadedImageUrl = uploadedImages[0].url;
+    }
+
     try {
       const event = await createEvent({
         title: values.title,
         category: values.category,
         description: values.description,
-        photo: values.photo,
+        photo: uploadedImageUrl,
         isOnline: values.isOnline,
         location: values.location,
         landmark: values.landmark,

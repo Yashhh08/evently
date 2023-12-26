@@ -74,3 +74,5 @@ export const timeFormatConverter = (timeString: string) => {
 
   return formattedTime;
 }
+
+export const convertFileToUrl = (file: File) => URL.createObjectURL(file);
