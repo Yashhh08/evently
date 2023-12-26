@@ -40,6 +40,7 @@ import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
 import { FileUploader } from "./FileUploader";
 import { useUploadThing } from "@/lib/uploadthing";
+import { th } from "date-fns/locale";
 
 const formSchema = z.object({
   title: z.string().trim().min(2, {
@@ -117,7 +118,7 @@ const EventForm = (props: Props) => {
       const uploadedImages = await startUpload(files);
 
       if (!uploadedImages) {
-        return;
+        throw new Error("Please upload a valid image below of 4MB.");
       }
 
       uploadedImageUrl = uploadedImages[0].url;
