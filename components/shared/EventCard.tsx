@@ -20,7 +20,7 @@ const EventCard = ({ event }: Props) => {
       className="border h-96 w-96 rounded-md flex flex-col hover:scale-105 transition-all shadow-md relative"
     >
       <Image
-        src={event.image}
+        src={event.photo}
         alt={event._id}
         width={1920}
         height={1280}

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { getEventById } from "@/lib/actions/event.action";
 import { dateConverter, timeFormatConverter } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -91,12 +92,12 @@ const Page = async ({ params }: Props) => {
         <div className="flex flex-wrap gap-3">
           <div>
             {new Date(event.endDate) > new Date(event.startDate)
-              ? `{${dateConverter(event.startDate)} - ${dateConverter(
+              ? `${dateConverter(event.startDate)} - ${dateConverter(
                   event.endDate
-                )}}`
+                )}`
               : `${dateConverter(event.startDate)}`}
           </div>
-          |
+          &nbsp;
           <div>
             {timeFormatConverter(event.startTime)} -{" "}
             {timeFormatConverter(event.endTime)}
@@ -107,7 +108,9 @@ const Page = async ({ params }: Props) => {
 
         <div>{event.description}</div>
 
-        <div>{event.url}</div>
+        <Link href={event.url} className="text-blue-700 ">
+          {event.url}
+        </Link>
 
         <div className="flex flex-wrap gap-3">
           {event.tags?.map((tag: any) => {
@@ -121,7 +124,7 @@ const Page = async ({ params }: Props) => {
       </div>
 
       <div className="mt-10">
-        <h2 className="text-4xl max-sm:text-2xl mt-3 text-center">
+        <h2 className="text-4xl max-sm:text-2xl mt-3 text-center bg-gradient-to-r from-violet-600 to-primary bg-clip-text text-transparent font-bold">
           Related Events
         </h2>
       </div>
