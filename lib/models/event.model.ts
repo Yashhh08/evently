@@ -1,29 +1,54 @@
 import { Schema, model, models } from "mongoose";
 
+export interface IEvent {
+    title: string;
+    description: string;
+    photo: string;
+    isOnline?: boolean;
+    location?: string;
+    landmark?: string;
+    startDate: Date;
+    endDate: Date;
+    startTime: Date;
+    endTime: Date;
+    duration?: number;
+    isMultipleDays: boolean;
+    totalCapacity: number;
+    availableTickets: number;
+    dailyCapacity?: number;
+    dailyAvailableTickets?: number;
+    isFree: boolean;
+    price?: number;
+    category: string;
+    tags?: string[];
+    organizer: string;
+    attendees?: string[];
+    ageRestriction?: number;
+    url?: string;
+}
+
 const eventSchema = new Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
+    photo: { type: String, required: true },
+    isOnline: { type: Boolean, default: false },
     location: { type: String },
-    landmark: { type: String },
-    isOnline: { type: Boolean, required: true },
+    landmark: { type: String, default: "Virtual" },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
-    startTime: { type: Date, required: true },
-    endTime: { type: Date, required: true },
+    startTime: { type: String, required: true },
+    endTime: { type: String, required: true },
     duration: { type: Number },
-    photo: { type: String, required: true },
-    price: { type: Number, required: true },
-    isFree: { type: Boolean, required: true },
-    category: { type: String, ref: 'Category', required: true },
+    // isMultipleDays: { type: Boolean, required: true, default: false },
+    totalCapacity: { type: Number, default: Math.max() },
+    isFree: { type: Boolean, required: true, default: false },
+    price: { type: Number, default: 0 },
+    category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
+    tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
     organizer: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     attendees: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    totalCapacity: { type: Number, required: true },
-    availableTickets: { type: Number, required: true },
     ageRestriction: { type: Number, default: 0 },
     url: { type: String },
-    isMultipleDays: { type: Boolean, required: true },
-    dailyCapacity: { type: Number },
-    dailyAvailableTickets: { type: Number },
 },
     {
         timestamps: true
