@@ -46,13 +46,14 @@ const Page = async ({ params }: Props) => {
 
   return (
     <div className="font-medium">
-      <div className="border rounded-md">
+      <div className="rounded-md md:h-[500px] flex justify-center items-center">
         <Image
           src={event.photo}
           alt={event.title}
-          width={500}
-          height={500}
-          className="rounded-md"
+          width={300}
+          height={300}
+          priority={true}
+          className="rounded-md w-full h-full object-contain"
         />
       </div>
       <div className="flex flex-col gap-5">
