@@ -115,11 +115,8 @@ const EventForm = (props: Props) => {
     let uploadedImageUrl = values.photo;
 
     try {
-      let uploadedImages: any;
       if (files.length > 0) {
-        uploadedImages = setTimeout(async () => {
-          await startUpload(files);
-        }, 5000);
+        const uploadedImages = await startUpload(files);
 
         if (!uploadedImages) {
           throw new Error("Please upload a valid image below of 4MB.");

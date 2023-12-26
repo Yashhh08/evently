@@ -115,7 +115,7 @@ const Page = async ({ params }: Props) => {
         <div className="flex flex-wrap gap-3">
           {event.tags?.map((tag: any) => {
             return (
-              <Badge variant={"secondary"} className="">
+              <Badge key={tag.name} variant={"secondary"} className="">
                 {tag.name}
               </Badge>
             );
