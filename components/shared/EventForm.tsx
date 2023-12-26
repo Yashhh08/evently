@@ -114,17 +114,17 @@ const EventForm = (props: Props) => {
 
     let uploadedImageUrl = values.photo;
 
-    if (files.length > 0) {
-      const uploadedImages = await startUpload(files);
+    try {
+      if (files.length > 0) {
+        const uploadedImages = await startUpload(files);
 
-      if (!uploadedImages) {
-        throw new Error("Please upload a valid image below of 4MB.");
+        if (!uploadedImages) {
+          throw new Error("Please upload a valid image below of 4MB.");
+        }
+
+        uploadedImageUrl = uploadedImages[0].url;
       }
 
-      uploadedImageUrl = uploadedImages[0].url;
-    }
-
-    try {
       const event = await createEvent({
         title: values.title,
         category: values.category,
