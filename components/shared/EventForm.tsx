@@ -312,9 +312,10 @@ const EventForm = (props: Props) => {
               </FormLabel>
               <FormControl>
                 <>
-                  <Input
+                  <Textarea
                     disabled={props.type === "edit"}
                     onKeyDown={(e) => handleKeyDown(e, field)}
+                    className="min-h-min"
                     // placeholder="Add tags and press enter or `,` to add them."
                   />
 
