@@ -315,7 +315,7 @@ const EventForm = (props: Props) => {
                   <Input
                     disabled={props.type === "edit"}
                     onKeyDown={(e) => handleKeyDown(e, field)}
-                    placeholder="Add tags and press enter or `,` to add them."
+                    // placeholder="Add tags and press enter or `,` to add them."
                   />
 
                   {field.value.length > 0 && (
@@ -341,7 +341,10 @@ const EventForm = (props: Props) => {
                   )}
                 </>
               </FormControl>
-              <FormDescription></FormDescription>
+              <FormDescription>
+                Add atleast 1 tag to describe what your event is about. You need
+                to press enter to add a tag.
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
