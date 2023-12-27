@@ -13,6 +13,7 @@ const Categories = () => {
           <Link
             href={item.path}
             key={item.title}
+            scroll={false}
             className="flex flex-col justify-center items-center gap-4 max-sm:gap-2 hover:text-primary md:hover:scale-95 transition-all max-md:text-primary"
           >
             <div className="max-md:h-12 max-md:w-12 h-16 w-16 border flex justify-center items-center rounded-full">

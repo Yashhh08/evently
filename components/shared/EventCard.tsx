@@ -60,7 +60,7 @@ const EventCard = ({ event }: Props) => {
               {timeFormatConverter(event.endTime)}
             </p>
           </div>
-          <h3 className="text-xl font-semibold line-clamp-2">{event.title}</h3>
+          <h3 className="text-xl font-semibold line-clamp-1">{event.title}</h3>
           <p className="font-normal text-xs line-clamp-2">
             {event.description}
           </p>
