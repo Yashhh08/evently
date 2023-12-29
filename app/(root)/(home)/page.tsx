@@ -2,8 +2,25 @@ import Categories from "@/components/shared/Categories";
 import EventCards from "@/components/shared/EventCards";
 import SearchBar from "@/components/shared/SearchBar";
 import SwiperComponent from "@/components/shared/SwiperComponent";
+import { getCategoryByName } from "@/lib/actions/category.action";
+import { getEvents, getEventsByCategory } from "@/lib/actions/event.action";
 
-export default function Home() {
+interface Props {
+  searchParams: { [key: string]: string | undefined };
+}
+
+export default async function Home({ searchParams }: Props) {
+  // const events = await getEvents();
+
+  let events = [];
+
+  if (searchParams.category) {
+    const category = await getCategoryByName(searchParams.category);
+
+    events = await getEventsByCategory(category._id);
+  } else {
+    events = await getEvents();
+  }
   return (
     <>
       <SwiperComponent />
@@ -18,7 +35,7 @@ export default function Home() {
           otherClasses="w-96"
         />
       </div>
-      <EventCards />
+      <EventCards events={events} />
     </>
   );
 }

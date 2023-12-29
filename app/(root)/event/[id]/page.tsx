@@ -1,9 +1,15 @@
+import EventCards from "@/components/shared/EventCards";
+import LikeCartButton from "@/components/shared/LikeCartButton";
+import NoResults from "@/components/shared/NoResults";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { getEventById } from "@/lib/actions/event.action";
+import { getEventById, getRelatedEvents } from "@/lib/actions/event.action";
+import { getUserByClerkId } from "@/lib/actions/user.action";
 import { dateConverter, timeFormatConverter } from "@/lib/utils";
+import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -40,18 +46,28 @@ interface Props {
 }
 
 const Page = async ({ params }: Props) => {
-  const like = false;
+  const { userId } = auth();
+
+  if (!userId) {
+    redirect("/sign-in");
+  }
+
+  const user = await getUserByClerkId(userId);
+
+  const likedEvent = await user.likedEvents.includes(params.id);
 
   const event = await getEventById(params.id);
 
+  const relatedEvents = await getRelatedEvents(params.id);
+
   return (
-    <div className="font-medium">
+    <div className="font-medium md:mx-24">
       <div className="rounded-md md:h-[500px] flex justify-center items-center">
         <Image
           src={event.photo}
           alt={event.title}
-          width={300}
-          height={300}
+          width={1920}
+          height={1800}
           priority={true}
           className="rounded-md w-full h-full object-contain"
         />
@@ -72,13 +88,13 @@ const Page = async ({ params }: Props) => {
           >{`By ${event.organizer?.firstName} ${event.organizer?.lastName}`}</Badge>
         </div>
 
-        <div className="flex flex-wrap gap-3">
+        {/* <div className="flex flex-wrap gap-3">
           <Button
             variant={"secondary"}
             className="flex gap-1 rounded-full hover:scale-105 transition-all"
           >
-            {!like && <FaRegHeart className="h-5 w-5 text-primary" />}
-            {like && <FaHeart className="h-full w-full text-primary" />}
+            {!likedEvent && <FaRegHeart className="h-5 w-5 text-primary" />}
+            {likedEvent && <FaHeart className="h-full w-full text-primary" />}
             Like
           </Button>
           <Button
@@ -88,7 +104,14 @@ const Page = async ({ params }: Props) => {
             <MdOutlineShoppingCart className="h-5 w-5 text-primary" />
             Book Now
           </Button>
-        </div>
+        </div> */}
+
+        <LikeCartButton
+          event={event}
+          user={user}
+          likedEvent={likedEvent}
+          option="eventPage"
+        />
 
         <div className="flex flex-wrap gap-3">
           <div>
@@ -128,6 +151,17 @@ const Page = async ({ params }: Props) => {
         <h2 className="text-4xl max-sm:text-2xl mt-3 text-center bg-gradient-to-r from-violet-600 to-primary bg-clip-text text-transparent font-bold">
           Related Events
         </h2>
+        <br />
+        {relatedEvents.length > 0 ? (
+          <EventCards events={relatedEvents} />
+        ) : (
+          <NoResults
+            title={"No Related Events Found"}
+            desc={""}
+            link={"/#categories"}
+            linkTitle={"Explore Events"}
+          />
+        )}
       </div>
     </div>
   );

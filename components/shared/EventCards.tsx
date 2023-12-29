@@ -1,10 +1,13 @@
 import React from "react";
 import EventCard from "./EventCard";
-import { getEvents } from "@/lib/actions/event.action";
+import { auth } from "@clerk/nextjs";
+import { getUserByClerkId, likeEvent } from "@/lib/actions/user.action";
 
-const EventCards = async () => {
-  const events = await getEvents();
+interface Props {
+  events: any;
+}
 
+const EventCards = async ({ events }: Props) => {
   return (
     <div className="flex justify-evenly items-center gap-10 flex-wrap">
       {events.map((event: any) => {

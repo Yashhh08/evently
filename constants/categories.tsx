@@ -20,56 +20,56 @@ export const categories: Category[] = [
   {
     icon: <MdNightlife />,
     title: "Parties",
-    path: "/",
+    path: "?category=parties",
   },
   {
     icon: <MdAddBusiness />,
     title: "Business",
-    path: "/",
+    path: "?category=business",
   },
   {
     icon: <IoFastFood />,
     title: "Food & Drink",
-    path: "/",
+    path: "?category=food",
   },
   {
     icon: <IoGameController />,
     title: "Hobbies",
-    path: "/",
+    path: "?category=hobbies",
   },
   {
     icon: <MdComputer />,
     title: "Tech and Innovation",
-    path: "/",
+    path: "?category=tech",
   },
   {
     icon: <FaMasksTheater />,
     title: "Performing & Visual Arts",
-    path: "/",
+    path: "?category=performing",
   },
   {
     icon: <MdEventNote />,
     title: "Exhibitions",
-    path: "/",
+    path: "?category=exhibitions",
   },
   {
     icon: <MdSportsGymnastics />,
     title: "Sports & Fitness",
-    path: "/",
+    path: "?category=sports",
   },
   {
     icon: <GrWorkshop />,
     title: "Seminars, Workshops and Conferences",
-    path: "/",
+    path: "?category=seminars",
   },
   {
     icon: <FaMusic />,
     title: "Concerts and Music",
-    path: "/",
+    path: "?category=concerts",
   },
   {
     icon: <MdOutlineHealthAndSafety />,
     title: "Health and Wellness",
-    path: "/",
+    path: "?category=health",
   },
 ];

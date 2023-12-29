@@ -163,11 +163,11 @@ const EventForm = (props: Props) => {
         title: "Success!",
         description: "Event created successfully.",
       });
-    } catch (err: any) {
+    } catch (error: any) {
       toast({
         variant: "destructive",
         title: "Something went wrong.",
-        description: err.message,
+        description: error.message,
       });
     } finally {
       setIsSubmitting(false);
@@ -213,7 +213,7 @@ const EventForm = (props: Props) => {
 
   return (
     <Form {...form}>
-      <h1 className="text-5xl font-bold max-sm:text-3xl bg-gradient-to-r from-violet-600 to-primary bg-clip-text text-transparent text-center">
+      <h1 className="text-4xl max-sm:text-2xl font-bold text-center bg-gradient-to-r from-violet-600 to-primary bg-clip-text text-transparent mb-5">
         {props.type === "edit" ? "Update Event" : "Create Event"}
       </h1>
       <br />

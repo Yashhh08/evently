@@ -1,41 +1,45 @@
 import Image from "next/image";
 import React from "react";
 import { Badge } from "../ui/badge";
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
-import { MdOutlineShoppingCart } from "react-icons/md";
 import { dateConverter, timeFormatConverter } from "@/lib/utils";
 import Link from "next/link";
+import LikeCartButton from "./LikeCartButton";
+import { auth } from "@clerk/nextjs";
+import { getUserByClerkId } from "@/lib/actions/user.action";
 
 interface Props {
   event: any;
 }
 
-const EventCard = ({ event }: Props) => {
-  const like = false;
+const EventCard = async ({ event }: Props) => {
+  const { userId } = auth();
+
+  let user = null;
+
+  let likedEvent = false;
+
+  if (userId) {
+    user = await getUserByClerkId(userId);
+    likedEvent = await user.likedEvents.includes(event._id);
+  }
 
   return (
-    <Link
-      href={`/event/${event._id}`}
-      className="border h-96 w-96 rounded-md flex flex-col hover:scale-105 transition-all shadow-md relative"
-    >
-      <Image
-        src={event.photo}
-        alt={event._id}
-        width={1920}
-        height={1280}
-        className="w-full h-1/2 rounded-md hover:opacity-80 transition-all relative"
-      />
-      <div className="absolute bottom-1/2 right-1 flex justify-center items-center">
-        <div className="border bg-secondary rounded-full m-1 h-7 w-7 flex justify-center items-center hover:scale-125">
-          {!like && <FaRegHeart className="h-full w-full p-1 text-primary" />}
-          {like && <FaHeart className="h-full w-full p-1 text-primary" />}
-        </div>
-        <div className="border bg-secondary rounded-full m-1 h-7 w-7 flex justify-center items-center hover:scale-125">
-          <MdOutlineShoppingCart className="h-full w-full p-1 text-primary" />
-        </div>
-      </div>
-      <div className="p-2 flex flex-col items-start gap-1 flex-1 font-medium">
+    <div className="border h-96 w-96 rounded-md flex flex-col hover:scale-105 transition-all shadow-md relative">
+      <Link href={`/event/${event._id}`} className="w-full h-1/2">
+        <Image
+          src={event.photo}
+          alt={event._id}
+          width={1920}
+          height={1280}
+          className="w-full h-full rounded-md hover:opacity-80 transition-all relative"
+        />
+      </Link>
+      <LikeCartButton event={event} user={user} likedEvent={likedEvent} />
+
+      <Link
+        href={`/event/${event._id}`}
+        className="p-2 flex flex-col items-start gap-1 flex-1 font-medium"
+      >
         <div className="w-full flex flex-wrap gap-2 justify-start items-center">
           <Badge variant="default">
             {event.isFree ? "Free" : `$ ${event.price}`}
@@ -60,17 +64,17 @@ const EventCard = ({ event }: Props) => {
               {timeFormatConverter(event.endTime)}
             </p>
           </div>
-          <h3 className="text-xl font-semibold line-clamp-2">{event.title}</h3>
+          <h3 className="text-xl font-semibold line-clamp-1">{event.title}</h3>
           <p className="font-normal text-xs line-clamp-2">
             {event.description}
           </p>
         </div>
-      </div>
+      </Link>
       <Badge
         variant={"secondary"}
         className="m-1 w-fit"
       >{`${event.organizer.firstName} ${event.organizer.lastName}`}</Badge>
-    </Link>
+    </div>
   );
 };
 

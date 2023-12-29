@@ -1,3 +1,4 @@
+import { th } from 'date-fns/locale';
 "use server"
 
 import { connectToDatabase } from "../dbconnection";
@@ -88,6 +89,40 @@ export async function getEventById(id: string) {
             .populate("tags", "name");
 
         return JSON.parse(JSON.stringify(event));
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+export async function getEventsByCategory(category: string) {
+    try {
+        await connectToDatabase();
+
+        const events = await Event.find({ category: category })
+            .populate("category", "name")
+            .populate("organizer", "firstName lastName email")
+            .populate("tags", "name");
+
+        return JSON.parse(JSON.stringify(events));
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+export async function getRelatedEvents(id: string) {
+    try {
+        await connectToDatabase();
+
+        const event = await Event.findById(id);
+
+        const events = await Event.find({ _id: { $nin: event._id }, category: event.category, tags: { $in: event.tags } })
+            .populate("category", "name")
+            .populate("organizer", "firstName lastName email")
+            .populate("tags", "name");
+
+        return JSON.parse(JSON.stringify(events));
     } catch (error) {
         console.log(error);
         throw error;
