@@ -1,5 +1,7 @@
 import React from "react";
 import EventCard from "./EventCard";
+import { auth } from "@clerk/nextjs";
+import { getUserByClerkId, likeEvent } from "@/lib/actions/user.action";
 
 interface Props {
   events: any;

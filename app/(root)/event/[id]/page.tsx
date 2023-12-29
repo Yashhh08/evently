@@ -1,11 +1,15 @@
 import EventCards from "@/components/shared/EventCards";
+import LikeCartButton from "@/components/shared/LikeCartButton";
 import NoResults from "@/components/shared/NoResults";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getEventById, getRelatedEvents } from "@/lib/actions/event.action";
+import { getUserByClerkId } from "@/lib/actions/user.action";
 import { dateConverter, timeFormatConverter } from "@/lib/utils";
+import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -42,7 +46,15 @@ interface Props {
 }
 
 const Page = async ({ params }: Props) => {
-  const like = false;
+  const { userId } = auth();
+
+  if (!userId) {
+    redirect("/sign-in");
+  }
+
+  const user = await getUserByClerkId(userId);
+
+  const likedEvent = await user.likedEvents.includes(params.id);
 
   const event = await getEventById(params.id);
 
@@ -76,13 +88,13 @@ const Page = async ({ params }: Props) => {
           >{`By ${event.organizer?.firstName} ${event.organizer?.lastName}`}</Badge>
         </div>
 
-        <div className="flex flex-wrap gap-3">
+        {/* <div className="flex flex-wrap gap-3">
           <Button
             variant={"secondary"}
             className="flex gap-1 rounded-full hover:scale-105 transition-all"
           >
-            {!like && <FaRegHeart className="h-5 w-5 text-primary" />}
-            {like && <FaHeart className="h-full w-full text-primary" />}
+            {!likedEvent && <FaRegHeart className="h-5 w-5 text-primary" />}
+            {likedEvent && <FaHeart className="h-full w-full text-primary" />}
             Like
           </Button>
           <Button
@@ -92,7 +104,14 @@ const Page = async ({ params }: Props) => {
             <MdOutlineShoppingCart className="h-5 w-5 text-primary" />
             Book Now
           </Button>
-        </div>
+        </div> */}
+
+        <LikeCartButton
+          event={event}
+          user={user}
+          likedEvent={likedEvent}
+          option="eventPage"
+        />
 
         <div className="flex flex-wrap gap-3">
           <div>

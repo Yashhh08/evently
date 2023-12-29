@@ -4,6 +4,8 @@ import User from "../models/user.model";
 import { connectToDatabase } from "../dbconnection";
 import Event from "../models/event.model";
 import Order from "../models/order.model";
+import { redirect } from "next/dist/server/api-utils";
+import { revalidatePath } from "next/cache";
 export interface CreateUserParams {
     clerkId: string;
     email: string;
@@ -123,5 +125,69 @@ export async function deleteUser(clerkId: string) {
     }
 }
 
+export async function likeEvent(eventId: string, userId: string) {
+    try {
+        await connectToDatabase();
 
+        const event = await Event.findById(eventId);
 
+        const user = await User.findById(userId);
+
+        if (!event) {
+            throw new Error("Event not found");
+        }
+
+        if (!user) {
+            throw new Error("Please login to like an event");
+        }
+
+        const alreadyLiked = await User.findOne({ _id: user._id, likedEvents: eventId });
+
+        if (!alreadyLiked) {
+            await User.findByIdAndUpdate(user._id, { $push: { likedEvents: eventId } });
+        } else {
+            await User.findByIdAndUpdate(user._id, { $pull: { likedEvents: eventId } });
+        }
+
+        revalidatePath(`/`);
+        revalidatePath(`/likes`)
+
+        if (alreadyLiked) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+export async function getLikedEvents(userId: string) {
+    try {
+        await connectToDatabase();
+
+        const user = await User.findById(userId);
+
+        if (!user) {
+            throw new Error("User not found");
+        }
+
+        const response = await User.findById(userId).populate({
+            path: "likedEvents",
+            populate: [
+                { path: "organizer", model: "User" },
+                { path: "category", model: "Category" },
+            ]
+        });
+
+        return JSON.parse(JSON.stringify(response.likedEvents));
+
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+
+}
