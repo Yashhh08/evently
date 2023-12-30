@@ -24,7 +24,7 @@ const EventCard = async ({ event }: Props) => {
   }
 
   return (
-    <div className="border h-96 w-96 rounded-md flex flex-col hover:scale-105 transition-all shadow-md relative">
+    <div className="border h-96 w-96 rounded-md flex flex-col hover:scale-95 transition-all shadow-md relative">
       <Link href={`/event/${event._id}`} className="w-full h-1/2">
         <Image
           src={event.photo}
