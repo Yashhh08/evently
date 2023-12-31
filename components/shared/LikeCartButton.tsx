@@ -50,6 +50,14 @@ const LikeCartButton = ({ event, user, likedEvent, option }: Props) => {
 
   const handleCheckout = async () => {
     try {
+      if (!user) {
+        toast({
+          variant: "destructive",
+          title: "You must be logged in to book a show.",
+        });
+        return;
+      }
+
       const order = {
         totalTickets: totalTickets,
         totalAmount: event.price,
