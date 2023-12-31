@@ -6,8 +6,7 @@ import Order from "../models/order.model";
 import User from "../models/user.model";
 import Event from "../models/event.model";
 import { connectToDatabase } from "../dbconnection";
-import { Cat } from "lucide-react";
-import Category from "../models/category.model";
+import { revalidatePath } from "next/cache";
 
 export interface OrderProps {
     totalTickets: number;
@@ -70,12 +69,21 @@ export async function createOrder(order: createOrderParams) {
 
         if (event) {
             event.attendees.push(user?._id);
-            event.soldOut = event.attendees.length >= event.totalCapacity;
-            event.ticketsLeft = event.totalCapacity - order.totalTickets;
+
+            if (event.totalCapacity !== -Infinity) {
+                event.soldOut = event.attendees.length >= event.totalCapacity;
+            }
+
+            if (event.totalCapacity !== -Infinity) {
+                event.ticketsLeft = event.totalCapacity - order.totalTickets;
+            }
+
             await event.save();
         }
 
         await newOrder.save();
+
+        revalidatePath("/tickets");
 
         return JSON.parse(JSON.stringify(newOrder));
     } catch (error) {

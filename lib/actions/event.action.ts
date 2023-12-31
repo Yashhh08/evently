@@ -128,3 +128,19 @@ export async function getRelatedEvents(id: string) {
         throw error;
     }
 }
+
+export async function getEventsByUserId(userId: string) {
+    try {
+        await connectToDatabase();
+
+        const events = await Event.find({ organizer: userId })
+            .populate("category", "name")
+            .populate("organizer", "firstName lastName email")
+            .populate("tags", "name");
+
+        return JSON.parse(JSON.stringify(events));
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
