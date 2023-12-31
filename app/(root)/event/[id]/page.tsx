@@ -77,7 +77,7 @@ const Page = async ({ params }: Props) => {
 
         <div className="flex max-sm:flex-wrap justify-left max-sm:justify-betwee items-center gap-3">
           <Badge className="text-base">
-            {event.isFree ? `Free` : `$ ${event.price}`}
+            {event.isFree ? `Free` : `₹ ${event.price}`}
           </Badge>
           <Badge className="text-base" variant={"secondary"}>
             {event.category.name}
