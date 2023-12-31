@@ -20,6 +20,7 @@ const eventSchema = new Schema({
     tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
     organizer: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     attendees: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    ticketsLeft: { type: Number, default: Math.max() },
     soldOut: { type: Boolean, default: false },
     ageRestriction: { type: Number, default: 0 },
     url: { type: String },

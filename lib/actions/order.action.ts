@@ -5,8 +5,9 @@ import Stripe from "stripe";
 import Order from "../models/order.model";
 import User from "../models/user.model";
 import Event from "../models/event.model";
-import { connection } from "mongoose";
 import { connectToDatabase } from "../dbconnection";
+import { Cat } from "lucide-react";
+import Category from "../models/category.model";
 
 export interface OrderProps {
     totalTickets: number;
@@ -70,6 +71,7 @@ export async function createOrder(order: createOrderParams) {
         if (event) {
             event.attendees.push(user?._id);
             event.soldOut = event.attendees.length >= event.totalCapacity;
+            event.ticketsLeft = event.totalCapacity - order.totalTickets;
             await event.save();
         }
 
@@ -82,13 +84,18 @@ export async function createOrder(order: createOrderParams) {
     }
 }
 
-export async function getOrders(userId: string) {
+export async function getOrdersByUserId(userId: string) {
     try {
         await connectToDatabase();
 
         const orders = await Order.find({ user: userId })
-            .populate("user", "firstName lastName email")
-            .populate("event", "title startDate");
+            .populate({
+                path: "event",
+                populate: [
+                    { path: "organizer", model: "User" },
+                    { path: "category", model: "Category" },
+                ]
+            });
 
         return JSON.parse(JSON.stringify(orders));
     } catch (error) {

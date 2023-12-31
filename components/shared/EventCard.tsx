@@ -6,7 +6,6 @@ import Link from "next/link";
 import LikeCartButton from "./LikeCartButton";
 import { auth } from "@clerk/nextjs";
 import { getUserByClerkId } from "@/lib/actions/user.action";
-import { FaIndianRupeeSign } from "react-icons/fa6";
 
 interface Props {
   event: any;
