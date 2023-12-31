@@ -6,6 +6,7 @@ import Link from "next/link";
 import LikeCartButton from "./LikeCartButton";
 import { auth } from "@clerk/nextjs";
 import { getUserByClerkId } from "@/lib/actions/user.action";
+import { FaIndianRupeeSign } from "react-icons/fa6";
 
 interface Props {
   event: any;
@@ -42,7 +43,7 @@ const EventCard = async ({ event }: Props) => {
       >
         <div className="w-full flex flex-wrap gap-2 justify-start items-center">
           <Badge variant="default">
-            {event.isFree ? "Free" : `$ ${event.price}`}
+            {event.isFree ? "Free" : `₹ ${event.price}`}
           </Badge>
           <Badge variant="secondary">{event.category.name}</Badge>
           <Badge variant="secondary">

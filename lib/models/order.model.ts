@@ -2,7 +2,6 @@ import { Schema, model, models } from "mongoose";
 
 const orderSchema = new Schema({
     stripeId: { type: String, required: true },
-    dateOfEvent: { type: Date, required: true },
     totalTickets: { type: Number, required: true },
     totalAmount: { type: Number, required: true },
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
