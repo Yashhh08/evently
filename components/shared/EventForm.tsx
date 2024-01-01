@@ -666,7 +666,7 @@ const EventForm = (props: Props) => {
                   <FormControl>
                     <Input
                       type="number"
-                      placeholder="The price of the event in USD."
+                      placeholder="The price of the event in INR."
                       {...field}
                     />
                   </FormControl>
