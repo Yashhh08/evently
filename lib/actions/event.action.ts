@@ -16,6 +16,8 @@ export async function createEvent(eventData: any) {
 
         let data = eventData;
 
+        data.ticketsLeft = data.totalCapacity;
+
         const category = await Category.findOne({ name: data.category });
 
         if (!category) {
