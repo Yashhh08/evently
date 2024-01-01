@@ -1,4 +1,5 @@
 import EventCards from "@/components/shared/EventCards";
+import NoResults from "@/components/shared/NoResults";
 import { Button } from "@/components/ui/button";
 import { getEventsByUserId } from "@/lib/actions/event.action";
 import { getUserByClerkId } from "@/lib/actions/user.action";
@@ -28,7 +29,16 @@ const Page = async () => {
           <Button className="w-fit">Create Event</Button>
         </Link>
       </div>
-      <EventCards events={events} />
+      {events.length > 0 ? (
+        <EventCards events={events} />
+      ) : (
+        <NoResults
+          title={"You have not created any events yet."}
+          desc={"create your first event now!"}
+          // link={"/#categories"}
+          // linkTitle={"Explore Events"}
+        />
+      )}
     </div>
   );
 };

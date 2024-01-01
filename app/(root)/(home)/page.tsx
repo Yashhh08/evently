@@ -1,5 +1,7 @@
 import Categories from "@/components/shared/Categories";
 import EventCards from "@/components/shared/EventCards";
+import NoResults from "@/components/shared/NoResults";
+import Pagination from "@/components/shared/Pagination";
 import SearchBar from "@/components/shared/SearchBar";
 import SwiperComponent from "@/components/shared/SwiperComponent";
 import { getCategoryByName } from "@/lib/actions/category.action";
@@ -10,17 +12,22 @@ interface Props {
 }
 
 export default async function Home({ searchParams }: Props) {
-  // const events = await getEvents();
-
   let events = [];
+  let totalPages = 0;
 
   if (searchParams.category) {
     const category = await getCategoryByName(searchParams.category);
 
     events = await getEventsByCategory(category._id);
   } else {
-    events = await getEvents();
+    const result = await getEvents(
+      searchParams.q ? searchParams.q : "",
+      searchParams.page ? +searchParams.page : 1
+    );
+    events = result.events;
+    totalPages = result.totalPages;
   }
+
   return (
     <>
       <SwiperComponent />
@@ -35,7 +42,20 @@ export default async function Home({ searchParams }: Props) {
           otherClasses="w-96"
         />
       </div>
-      <EventCards events={events} />
+      {events.length > 0 ? (
+        <EventCards events={events} />
+      ) : (
+        <NoResults
+          title={"No events found"}
+          desc={""}
+          // link={"/#categories"}
+          // linkTitle={"Explore Events"}
+        />
+      )}
+      <Pagination
+        page={searchParams.page ? +searchParams.page : 1}
+        totalPages={totalPages}
+      />
     </>
   );
 }
