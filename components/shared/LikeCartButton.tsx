@@ -30,9 +30,9 @@ const LikeCartButton = ({ event, user, likedEvent, option }: Props) => {
   const { toast } = useToast();
 
   const disableCart =
-    new Date(event.startDate) < new Date() ||
-    event.soldOut ||
-    event.ticketsLeft <= 0;
+    new Date(event.startDate) < new Date() || event.soldOut || event.ticketsLeft
+      ? event.ticketsLeft <= 0
+      : false;
 
   const [totalTickets, setTotalTickets] = useState(1);
 
