@@ -61,18 +61,27 @@ export async function createEvent(eventData: any) {
     }
 }
 
-export async function getEvents() {
+export async function getEvents(page = 1, pageSize = 12) {
     try {
         await connectToDatabase();
 
+
         await User.find();
+
+        const skip = (page - 1) * pageSize;
 
         const events = await Event.find()
             .populate("category", "name")
             .populate("organizer", "firstName lastName email")
-            .populate("tags", "name");
+            .populate("tags", "name")
+            .skip(skip)
+            .limit(pageSize);
 
-        return JSON.parse(JSON.stringify(events));
+        const total = await Event.countDocuments();
+
+        const totalPages = Math.ceil(total / pageSize);
+
+        return { events: JSON.parse(JSON.stringify(events)), totalPages };
     } catch (error) {
         console.log(error);
         throw error;

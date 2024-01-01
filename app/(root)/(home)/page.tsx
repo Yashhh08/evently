@@ -1,5 +1,6 @@
 import Categories from "@/components/shared/Categories";
 import EventCards from "@/components/shared/EventCards";
+import Pagination from "@/components/shared/Pagination";
 import SearchBar from "@/components/shared/SearchBar";
 import SwiperComponent from "@/components/shared/SwiperComponent";
 import { getCategoryByName } from "@/lib/actions/category.action";
@@ -10,17 +11,19 @@ interface Props {
 }
 
 export default async function Home({ searchParams }: Props) {
-  // const events = await getEvents();
-
   let events = [];
+  let totalPages = 0;
 
   if (searchParams.category) {
     const category = await getCategoryByName(searchParams.category);
 
     events = await getEventsByCategory(category._id);
   } else {
-    events = await getEvents();
+    const result = await getEvents(searchParams.page ? +searchParams.page : 1);
+    events = result.events;
+    totalPages = result.totalPages;
   }
+
   return (
     <>
       <SwiperComponent />
@@ -36,6 +39,10 @@ export default async function Home({ searchParams }: Props) {
         />
       </div>
       <EventCards events={events} />
+      <Pagination
+        page={searchParams.page ? +searchParams.page : 1}
+        totalPages={totalPages}
+      />
     </>
   );
 }
