@@ -75,7 +75,7 @@ export async function createOrder(order: createOrderParams) {
             }
 
             if (event.totalCapacity !== -Infinity) {
-                event.ticketsLeft = event.totalCapacity - order.totalTickets;
+                event.ticketsLeft = event.ticketsLeft - order.totalTickets;
             }
 
             await event.save();
