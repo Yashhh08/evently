@@ -7,6 +7,7 @@ import Event from "../models/event.model";
 import Tag from "../models/tag.model";
 import { revalidatePath } from "next/cache";
 import User from "../models/user.model";
+import { FilterQuery } from 'mongoose';
 
 export async function createEvent(eventData: any) {
     try {
@@ -61,16 +62,24 @@ export async function createEvent(eventData: any) {
     }
 }
 
-export async function getEvents(page = 1, pageSize = 12) {
+export async function getEvents(searchQuery: string, page = 1, pageSize = 12) {
     try {
         await connectToDatabase();
 
+        const query: FilterQuery<typeof Event> = {};
+
+        if (searchQuery) {
+            query.$or = [
+                { title: { $regex: new RegExp(searchQuery, "i") } },
+                { description: { $regex: new RegExp(searchQuery, "i") } }
+            ];
+        }
 
         await User.find();
 
         const skip = (page - 1) * pageSize;
 
-        const events = await Event.find()
+        const events = await Event.find(query)
             .populate("category", "name")
             .populate("organizer", "firstName lastName email")
             .populate("tags", "name")
