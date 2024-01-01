@@ -71,7 +71,7 @@ export async function createOrder(order: createOrderParams) {
             event.attendees.push(user?._id);
 
             if (event.totalCapacity !== -Infinity) {
-                event.soldOut = event.attendees.length >= event.totalCapacity;
+                event.soldOut = event.ticketsLeft <= 0 ? true : false;
             }
 
             if (event.totalCapacity !== -Infinity) {
