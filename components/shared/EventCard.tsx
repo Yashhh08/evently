@@ -6,12 +6,14 @@ import Link from "next/link";
 import LikeCartButton from "./LikeCartButton";
 import { auth } from "@clerk/nextjs";
 import { getUserByClerkId } from "@/lib/actions/user.action";
+import DeleteEventButton from "./DeleteEventButton";
 
 interface Props {
   event: any;
+  page?: string;
 }
 
-const EventCard = async ({ event }: Props) => {
+const EventCard = async ({ event, page }: Props) => {
   const { userId } = auth();
 
   let user = null;
@@ -34,6 +36,7 @@ const EventCard = async ({ event }: Props) => {
           className="w-full h-full rounded-md hover:opacity-80 transition-all relative"
         />
       </Link>
+
       <LikeCartButton event={event} user={user} likedEvent={likedEvent} />
 
       <Link
@@ -70,10 +73,13 @@ const EventCard = async ({ event }: Props) => {
           </p>
         </div>
       </Link>
-      <Badge
-        variant={"secondary"}
-        className="m-1 w-fit"
-      >{`${event.organizer.firstName} ${event.organizer.lastName}`}</Badge>
+      <div className="flex justify-between">
+        <Badge
+          variant={"secondary"}
+          className="m-1 w-fit"
+        >{`${event.organizer.firstName} ${event.organizer.lastName}`}</Badge>
+        {page === "profile" && <DeleteEventButton event={event} />}
+      </div>
     </div>
   );
 };

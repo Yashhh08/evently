@@ -8,6 +8,7 @@ import Tag from "../models/tag.model";
 import { revalidatePath } from "next/cache";
 import User from "../models/user.model";
 import { FilterQuery } from 'mongoose';
+import Order from '../models/order.model';
 
 export async function createEvent(eventData: any) {
     try {
@@ -157,6 +158,32 @@ export async function getEventsByUserId(userId: string) {
             .populate("tags", "name");
 
         return JSON.parse(JSON.stringify(events));
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+export async function deleteEventById(eventId: string) {
+    try {
+        await connectToDatabase();
+
+        const event = await Event.findByIdAndDelete(eventId);
+
+        await Tag.updateMany({ events: eventId }, { $pull: { events: eventId } });
+
+        await User.updateMany({ likedEvents: eventId }, { $pull: { likedEvents: eventId } });
+
+        // add refund logic here
+
+        await Order.deleteMany({ event: eventId });
+
+        revalidatePath("/");
+        revalidatePath("/profile");
+        revalidatePath("/tickets");
+        revalidatePath("/likes");
+
+        return JSON.parse(JSON.stringify(event));
     } catch (error) {
         console.log(error);
         throw error;

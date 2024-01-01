@@ -30,7 +30,7 @@ const Page = async () => {
         </Link>
       </div>
       {events.length > 0 ? (
-        <EventCards events={events} />
+        <EventCards events={events} page="profile" />
       ) : (
         <NoResults
           title={"You have not created any events yet."}
