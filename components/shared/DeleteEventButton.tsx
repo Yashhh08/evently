@@ -46,7 +46,7 @@ const DeleteEventButton = ({ event }: any) => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription className="flex flex-col gap-1">
+          <DialogDescription className="flex flex-col gap-1 max-sm:items-center">
             <p>This action cannot be undone.</p>
             <p>This will permanently delete the event and all related data.</p>
             <p>
