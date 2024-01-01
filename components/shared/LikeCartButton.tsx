@@ -29,11 +29,14 @@ interface Props {
 const LikeCartButton = ({ event, user, likedEvent, option }: Props) => {
   const { toast } = useToast();
 
-  const disableCart = new Date(event.startDate) < new Date() || event.soldOut;
+  const disableCart =
+    new Date(event.startDate) < new Date() ||
+    event.soldOut ||
+    event.ticketsLeft <= 0;
 
   const [totalTickets, setTotalTickets] = useState(1);
 
-  const maxTickets = event.totalCapacity - event.attendees.length;
+  const maxTickets = event.ticketsLeft;
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
