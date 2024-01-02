@@ -48,13 +48,18 @@ interface Props {
 const Page = async ({ params }: Props) => {
   const { userId } = auth();
 
-  if (!userId) {
-    redirect("/sign-in");
+  let user = null;
+  let likedEvent = null;
+
+  // if (!userId) {
+  //   redirect("/sign-in");
+  // }
+
+  if (userId) {
+    user = await getUserByClerkId(userId);
+
+    likedEvent = await user.likedEvents.includes(params.id);
   }
-
-  const user = await getUserByClerkId(userId);
-
-  const likedEvent = await user.likedEvents.includes(params.id);
 
   const event = await getEventById(params.id);
 
