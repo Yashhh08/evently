@@ -10,10 +10,19 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Evently",
-  description: "Evently is a platform for event management.",
+  description:
+    "Evently is a platform for event management. It allows you to create and manage events, sell tickets and more.",
   icons: {
     icon: "/images/favicon.ico",
   },
+  openGraph: {
+    title: "Evently",
+    description:
+      "Evently is a platform for event management. It allows you to create and manage events, sell tickets and more.",
+    images: [{ url: "/images/preview.png" }],
+  },
+  creator: "Yash Yerunkar",
+  publisher: "Yash Yerunkar",
 };
 
 export default function RootLayout({
