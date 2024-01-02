@@ -56,7 +56,7 @@ const LikeCartButton = ({ event, user, likedEvent, option }: Props) => {
       if (!user) {
         toast({
           variant: "destructive",
-          title: "You must be logged in to book a show.",
+          title: "You must be logged in to book event.",
         });
         return;
       }
